@@ -1,10 +1,12 @@
 package com.example.twoactivities;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int TEXT_REQUEST= 1;
     private TextView mReplyHeadTextView;
     private TextView mReplyTextView;
+    ActivityMainBinding b;
 
     public static final String EXTRA_MESSAGE = "com.example.andraiod.twoactivities.extra.MESSAGE";
     private EditText mMessageEditText;
@@ -28,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ActivityMainBinding b= ActivityMainBinding.inflate(getLayoutInflater());
+        b= ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
         b.buttonMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
         mMessageEditText =b.editTextMain;
         mReplyHeadTextView= b.textHeaderReply;
         mReplyTextView= b.textMessageReply;
+        if (savedInstanceState!=null){
+            boolean isVisible= savedInstanceState.getBoolean("reply_visible");
+            if (isVisible){
+                mReplyHeadTextView.setVisibility(View.VISIBLE);
+                mReplyTextView.setText(savedInstanceState.getString("replyText"));
+                mReplyTextView.setVisibility(View.VISIBLE);
+            }
+        }
 
     }
 
@@ -68,5 +79,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(mReplyTextView.getVisibility()==View.VISIBLE){
+            outState.putBoolean("reply_visible",true);
+            outState.putString("replyText", mReplyTextView.getText().toString());
+        }
+    }
 }
