@@ -15,8 +15,7 @@ import com.example.twoactivities.databinding.ActivitySecondBinding;
 public class SecondActivity extends AppCompatActivity {
     public static final String EXTRA_REPLY= "com.example.android.twoactivities.extra.REPLY";
     private EditText mReply;
-    private TextView mRecivedMessage;
-    private TextView mRecieveHeader;
+    private TextView mReceivedMessage;
     ActivitySecondBinding a;
 
     @Override
@@ -28,15 +27,15 @@ public class SecondActivity extends AppCompatActivity {
         mReply= a.editTextSecond;
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        mRecieveHeader = a.textHeader;
-        mRecivedMessage = a.textMessage;
-        mRecivedMessage.setText(message);
+        TextView mReceivedHeader = a.textHeader;
+        mReceivedMessage = a.textMessage;
+        mReceivedMessage.setText(message);
         if (savedInstanceState!=null){
             boolean isVisible= savedInstanceState.getBoolean("reply_visible");
             if (isVisible){
-                mRecieveHeader.setVisibility(View.VISIBLE);
-              mRecivedMessage.setText(savedInstanceState.getString("replyText"));
-                mRecivedMessage.setVisibility(View.VISIBLE);
+                mReceivedHeader.setVisibility(View.VISIBLE);
+              mReceivedMessage.setText(savedInstanceState.getString("replyText"));
+                mReceivedMessage.setVisibility(View.VISIBLE);
             }
         }
 
@@ -63,10 +62,9 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(mRecivedMessage.getVisibility()==View.VISIBLE){
+        if(mReceivedMessage.getVisibility()==View.VISIBLE){
             outState.putBoolean("reply_visible",true);
-            outState.putString("replyText", mRecivedMessage.getText().toString());
+            outState.putString("replyText", mReceivedMessage.getText().toString());
         }
         }
     }
-}
