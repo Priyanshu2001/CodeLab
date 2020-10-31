@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mReplyTextView;
     ActivityMainBinding b;
 
-    public static final String EXTRA_MESSAGE = "com.example.andraiod.twoactivities.extra.MESSAGE";
+    public static final String EXTRA_MESSAGE = "com.example.android.twoactivities.extra.MESSAGE";
     private EditText mMessageEditText;
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
