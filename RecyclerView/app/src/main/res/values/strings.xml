@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RecyclerView</string>
+
+    <string name="price_in_rs">Price in Rs.</string>
+    <string name="items">Items</string>
+    <string name="count">Items clicked (0)</string>
+</resources>
